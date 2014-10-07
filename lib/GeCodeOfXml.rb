@@ -36,17 +36,12 @@ module GeCodeOfXml
       ActiveRecord::Base.establish_connection(conf[env])
       $stdout.print("OK ")
 
-      #Realiza uma conexção com as configurações encontradas do database.yml
-      #Busca toda a estrutura da base de dados
+      #Realiza uma conexção com as configurações encontradas no XML/XMI
+      #Busca toda a estrutura da base XML/XMI
       #Entre elas:
-      # * Nome do banco, usuario, senha, endereço, 
-      # * adaptador(mysql, postgresql...), codificação, linguagem e S.O.
-      #
-      $stdout.print("\nCarregando Informações do Banco de Dados : ")
-      @con = ActiveRecord::Base.connection
-      $stdout.print("OK ")
-      
-      
+      # * Class, attributes, types , 
+             
+            
       $stdout.print("\nBuscando Tabelas: ")
       @table_names = Array.new
        
@@ -62,19 +57,11 @@ module GeCodeOfXml
            end
         end
       end 
-
-
-      #Busca todos os nomes de tabelas daquele banco de dados
-      @con.tables.each { |e| @table_names.push(e) if !ignore_tables.include?(e) }
-      
-      $stdout.print("OK \n")
-      #Deletamos tabelas que não devem ser geradas
-      
+     
       #Sessão Estatística
       ents = @table_names.size
       $stdout.print("\nExecutando ação para #{ents.to_s} Tabelas.")
       $stdout.print("\nAproximadamente  #{(ents*13+3).to_s} Arquivos e #{(ents*1+2).to_s} Diretórios serão Gerados/Deletados.  \n\n\n")
-
 
         
       #Guarda informações sobre Relacionamentos para ser utilizada nas Views
