@@ -9,7 +9,7 @@
 
 class GeCodeOfXmlGenerator < Rails::Generator::NamedBase
   #
-  #  Classe GetnaGenerator é responsável pelo processo de coleta de dados via linha de comando
+  #  Classe gecodeofxmlGenerator é responsável pelo processo de coleta de dados via linha de comando
   #   Apartir de dados encontrados em uma base de dados como Mysql, PostgreSQL e SQLite,
   # gera-se então toda a estrutura de uma aplicação Rails como um Scaffold, mas em um unico commado.
   #   Das tabelas são buscados nome das tabelas(para classes), nome dos campos (para Atributos) e seus 
@@ -17,10 +17,10 @@ class GeCodeOfXmlGenerator < Rails::Generator::NamedBase
 
   def initialize(runtime_args, runtime_options = {})
     super
-   # Instânciamos o Objeto GEtna com as infomações do Banco de dados
+   # Instânciamos o Objeto gecodeofxml com as infomações do Banco de dados
    @geobject = GeCodeOfXml::Base.new(@name)
 
-   #instâncimamos Objeto Getna::Utilities para tratarmos a entrada
+   #instâncimamos Objeto gecodeofxml::Utilities para tratarmos a entrada
    @utility = GeCodeOfXml::Utilities.new
 
     #Pega o tipo de Layout, caso não seja informado utiliza-se default
@@ -37,12 +37,12 @@ class GeCodeOfXmlGenerator < Rails::Generator::NamedBase
       # == GENERATE Diretório de Migrações
       m.directory("db/migrate")      
       # == GENERATE Stilo 
-      m.file("/styles/#{@style}.css","public/stylesheets/getna.css")   
-     # == COPY getna logo 
-      m.file("/images/getna.png","public/images/getna.png")     
+      m.file("/styles/#{@style}.css","public/stylesheets/gecodeofxml.css")   
+     # == COPY gecodeofxml logo 
+      m.file("/images/gecodeofxml.png","public/images/gecodeofxml.png")     
       
-      # == GENERATE Pagina inicial do GEtna
-      #TODO colocar imagem do GEtna
+      # == GENERATE Pagina inicial do gecodeofxml
+      #TODO colocar imagem do gecodeofxml
       m.template("index.html.erb","public/index.html",:assigns=>{:entities =>@geobject} ,:collision => :force)   
 
            

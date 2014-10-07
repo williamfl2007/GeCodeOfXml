@@ -18,7 +18,8 @@ module GeCodeOfXml
 
       start_messenger(env)
       
-                       
+      
+
      
       #Abre Arquivo de Configuração de banco de dados do Rails
       conf = YAML::load(File.open("#{RAILS_ROOT}/config/database.yml")) 
@@ -48,6 +49,21 @@ module GeCodeOfXml
       
       $stdout.print("\nBuscando Tabelas: ")
       @table_names = Array.new
+       
+      url = "/diagrama.xmi"
+      xml = Nokogiri::XML(open(url))
+      @table_names = xml.search('UML:Class').map do |classe|
+        %w[name].each_with_object({}) do |n, o|
+          o[n] = classe.at(n).text
+        end
+        @attr_names = xml.search('UML:Attribute').map do |atributo|
+           %w[name].each_with_object({}) do |n, o|
+            o[n] = atributo.atributo(n).text
+           end
+        end
+      end 
+
+
       #Busca todos os nomes de tabelas daquele banco de dados
       @con.tables.each { |e| @table_names.push(e) if !ignore_tables.include?(e) }
       
