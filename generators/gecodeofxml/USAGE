@@ -1,0 +1,52 @@
+== GeCodeOfXml 
+
+ script/generate GeCodeOfXml [environment] [opções]
+
+_____
+Para geração de arquivos com o GeCodeOfXml é necessário apenas informar as configurações 
+de acesso ao banco de dados, para facilitar ainda mais a vida do programadores e não
+e diminuir a repetição de informaçõe, os dados necessarios para essa conexão são retirados
+do database.yml encontrado na pasta config/  da sua aplicação Rails, com iss você pode definir
+qualquer uma de suas environment para ser a origem da informação ou até criar uma apenas para 
+esse fim. ex:
+
+>>database.yml
+--------------------------------------------------------------------------------
+ development:
+   adapter: mysql
+   database: GeCodeOfXml
+   username: user
+   password: pass
+
+ my_GeCodeOfXml_input
+   adapter: postgres
+   database: input
+   username: user
+   password: pass
+--------------------------------------------------------------------------------
+
+== Executando (Sem Opções)
+
+script/generate GeCodeOfXml development
+
+ou para o segundo caso:
+
+ script/generate GeCodeOfXml my_GeCodeOfXml_input
+
+Por Default o environment é 'delevopment'
+
+== Opções
+
+ layout:
+   default
+   depot
+   rails
+
+== Exemplos
+
+ # exemplo #
+ script/generate GeCodeOfXml development layout:depot
+
+ # observação #
+ Caso não seja passado é assumido o layout 'default'
+
